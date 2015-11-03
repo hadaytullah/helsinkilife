@@ -11,7 +11,5 @@ gulpfile.js
 hooks/
 ionic.project
 package.json
-platforms/
-plugins/
 resources/
 scss/
