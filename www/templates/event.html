@@ -1,0 +1,83 @@
+<ion-view view-title="Event">
+  <ion-content>
+      
+      <div class="list card">
+
+        <div class="item item-avatar">
+            <img src="{{event.location.image}}">
+            
+            <h2>{{event.name.fi}}</h2>
+            <!--p>November 05, 1955</p-->
+        </div>
+
+        <div class="item item-body">
+            <img class="full-image" src="{{event.location.image}}">
+            
+              <!--div ng-if="!isEmpty(event.description.fi)">{{event.description.fi}}</div -->    
+            <!-- div ng-if="isEmpty(event.description.fi)">No description available.</div -->    
+            <!-- Event description is html so it needs a special treatment -->
+            <div ng-bind-html='event.description.fi'></div>
+            
+            <!--p>
+              <a href="#" class="subdued">1 Like</a>
+              <a href="#" class="subdued">5 Comments</a>
+            </p-->
+            
+                <!--div ng-if="!isEmpty(event.location.street_address.fi)">{{event.location.street_address.fi}}, {{event.location.postal_code}}, {{event.location.address_locality.fi}}</div>
+            <div ng-if="isEmpty(event.location.street_address.fi)"> The location of the event is not available.</div-->
+            
+        </div>
+        <div class="item item-body">
+            <!--img class="full-image" src="delorean.jpg"-->
+            <p>
+              {{event.location.street_address.fi}}
+            </p>
+            <p>
+              {{event.location.postal_code}}, {{event.location.address_locality.fi}}
+            </p>
+            
+            <!--p>
+              <a href="#" class="subdued">1 Like</a>
+              <a href="#" class="subdued">5 Comments</a>
+            </p-->
+        </div>
+
+  <!--div class="item tabs tabs-secondary tabs-icon-left">
+    <a class="tab-item" href="#">
+      <i class="icon ion-thumbsup"></i>
+      Like
+    </a>
+    <a class="tab-item" href="#">
+      <i class="icon ion-chatbox"></i>
+      Comment
+    </a>
+    <a class="tab-item" href="#">
+      <i class="icon ion-share"></i>
+      Share
+    </a>
+  </div-->
+
+      </div>
+    <!--div class="row">
+        <div class="bar bar-header bar-calm">
+            <h1 class="title">{{event.name.fi}}</h1>
+        </div>    
+    </div>
+
+    <div class="row">
+          <p>{{event.description.fi}}</p>
+    </div>
+
+    <div class="row">
+    
+    </div>
+
+    <div class="row">
+      <div class="col">.col</div>
+      <div class="col">.col</div>
+    </div-->
+      
+    
+      
+  </ion-content>
+</ion-view>
