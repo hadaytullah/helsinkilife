@@ -1,9 +1,25 @@
-<ion-view view-title="Events">
+<ion-view view-title="Tapahtumat">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="event in eventlist" href="#/app/event/{{event.id}}">
-        {{event.name.fi}}
-      </ion-item>
+        <ion-item ng-repeat="event in eventlist" href="#/app/event/{{event.id}}">
+             <!--div id="event-image" ng-if="!utility.isEmpty(event.location.image)">               
+                 <img ng-src="{{event.location.image}}">
+            </div-->    
+            <!--div ng-if="utility.isEmpty(event.location.image)">               
+                 <img ng-src="img/helsinki1-small.jpg">
+            </div-->
+            <!--img ng-src="img/helsinki1-small.jpg"-->
+            <div id="event-list-item">
+                <img ng-src="{{event.location.image}}">
+                <h2>{{event.name.fi}}</h2>
+            </div>
+        </ion-item>
+        <ion-item>
+            <button class="button button-positive button-full">
+                Lisää
+            </button>
+        </ion-item>
     </ion-list>
+      
   </ion-content>
 </ion-view>

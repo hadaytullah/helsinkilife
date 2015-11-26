@@ -55,9 +55,23 @@ angular.module('starter.controllers', [])
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 
-.controller('EventListCtrl',['$scope','$http','DataService',function($scope,$http,dataService){
+.controller('EventListCtrl',['$scope','$http','$ionicLoading','DataService','Utility',function($scope,$http,$ionicLoading,dataService,utility){
     
-    $http.get('http://api.hel.fi/linkedevents/v0.1/event/?start=2015-011-15&end=2015-12-30&include=location')
+    var today = new Date(),
+    day = today.getDate(),
+    month= today.getMonth()+1, //January is 0!
+    year = today.getFullYear(), //YYYY
+    startDate=year+'-'+month+'-'+day,
+    endDate=year+'-'+(month+1)+'-'+day,
+    urlMonthEvent = 'http://api.hel.fi/linkedevents/v0.1/event/?start='+startDate+'&end='+endDate+'&include=location' ;
+    console.log(urlMonthEvent);
+    
+    // show loading message
+    $ionicLoading.show({
+      template: 'Pieni hetki...'
+    });
+    
+    $http.get(urlMonthEvent)
     
     .then(
         function successCallback(response){
@@ -67,6 +81,14 @@ angular.module('starter.controllers', [])
             
             //store the data, accessible to all views through the data service
             dataService.setFilteredEventList(response.data.data);
+            
+            angular.forEach(response.data.data,function(value,key){
+                if(utility.isEmpty(value.location.image)){
+                     var pictureNumber = utility.getRandomInt(1,4);
+                     value.location.image="img/helsinki"+pictureNumber+"-small.jpg";
+                   
+                }
+            },this);
         
         },
         function errorCallback(response){
@@ -75,6 +97,12 @@ angular.module('starter.controllers', [])
         }
     
     
+    ).finally(
+        function(){
+            //hide loading message
+            $ionicLoading.hide();
+        }
+        
     );
     //$scope.eventlist = [
     //{ name:{ fi:'Event1'}, id: 1 },
@@ -85,11 +113,11 @@ angular.module('starter.controllers', [])
 
 }])
 
-.controller('EventCtrl',['$scope','$http','$stateParams','$filter','DataService','Utility',function($scope,$http,$stateParams,$filter, dataService,Utility){
+.controller('EventCtrl',['$scope','$http','$stateParams','$filter','DataService','Utility',function($scope,$http,$stateParams,$filter, dataService,utility){
     console.log($stateParams);
     console.log(dataService.getFilteredEventList());
     
-    $scope.isEmpty = Utility.isEmpty; //To be fixed, don't use logic in HTML
+    $scope.isEmpty = utility.isEmpty; //To be fixed, don't use logic in HTML
     
     //TODO: MAke a local 'event' object and copy contents from fetched data. 
     //It will reduce coupling between HTML and Backend data/JSON
@@ -104,15 +132,15 @@ angular.module('starter.controllers', [])
         
         //sanitizing, event desciption which is html
         //$scope.eventDescriptionHtml = $scope.event.description.fi;
-        if(Utility.isEmpty($scope.event.description.fi)){
+        if(utility.isEmpty($scope.event.description.fi)){
             //TODO: Covert using i18n to english/finnish
             $scope.event.desciption.fi="Tieto tapahtumasta ei ole saatavilla nyt.";
         }
         
-        if(Utility.isEmpty($scope.event.location.image)){
+        /*if(Utility.isEmpty($scope.event.location.image)){
             var pictureNumber = Utility.getRandomInt(1,4);
             $scope.event.location.image="img/helsinki"+pictureNumber+"-small.jpg";
-        }
+        }*/
         
     }
     
