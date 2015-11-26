@@ -1,7 +1,16 @@
 /* Empty. Add your own CSS if you like */
 
+div{
+    /*width: 200px;  */
+    word-break: break-all;
+}
+
 ion-list ion-item {
     border-style:none !important;
+}
+
+ion-list a {
+    padding: 16px 16px 16px 16px !important;
 }
 
 ion-item #event-list-item{
@@ -11,7 +20,7 @@ ion-item #event-list-item{
     /*padding: 20px; */
     /*background-position: left top;*/
     overflow:hidden;
-    
+    word-wrap: break-word;
     /*background: url(paper.gif);
     background-repeat: repeat;
     width: 200px;
@@ -23,6 +32,7 @@ ion-item #event-list-item img{
     /*position: absolute;*/
     top: -100px;
     width:100%;
+    
     /*left: -100px;*/
 
 }
@@ -34,6 +44,7 @@ ion-item #event-list-item h2 {
    /*width: 100%; */
     background-color:aliceblue;
     opacity: 0.75;
+    
     /*font-size: 16px;*/
     /*font-weight: 350;*/
 }
