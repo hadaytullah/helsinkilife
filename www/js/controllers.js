@@ -62,8 +62,16 @@ angular.module('starter.controllers', [])
     month= today.getMonth()+1, //January is 0!
     year = today.getFullYear(), //YYYY
     startDate=year+'-'+month+'-'+day,
-    endDate=year+'-'+(month+1)+'-'+day,
-    urlMonthEvent = 'http://api.hel.fi/linkedevents/v0.1/event/?start='+startDate+'&end='+endDate+'&include=location' ;
+    endDate='';
+   
+    //checking for year change
+    if(month+1>12){
+      endDate = (year+1)+'-1-'+day;
+    }else{	
+      endDate=year+'-'+(month+1)+'-'+day;
+    }
+
+    var urlMonthEvent = 'http://api.hel.fi/linkedevents/v0.1/event/?start='+startDate+'&end='+endDate+'&include=location' ;
     console.log(urlMonthEvent);
     
     // show loading message
